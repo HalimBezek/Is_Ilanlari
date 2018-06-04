@@ -48,8 +48,6 @@ public class isilanlari extends AppCompatActivity {
              int colorpres = Color.parseColor("#FFB6CFF5");
              btnTum.getBackground().mutate().setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC));
              btnFav.getBackground().mutate().setColorFilter(new PorterDuffColorFilter(colorpres, PorterDuff.Mode.SRC));
-           //  btnFav.setBackground(0xff99cc00);
-            // btnTum.setBackgroundColor(R.drawable.butontasarimimain);
 
              break;
 
@@ -65,9 +63,6 @@ public class isilanlari extends AppCompatActivity {
              int colorpres1 = Color.parseColor("#FFB6CFF5");
              btnTum.getBackground().mutate().setColorFilter(new PorterDuffColorFilter(colorpres1, PorterDuff.Mode.SRC));
              btnFav.getBackground().mutate().setColorFilter(new PorterDuffColorFilter(color1, PorterDuff.Mode.SRC));
-
-           //  btnFav.setBackgroundColor(R.drawable.butontasarimimain_press);
-          //   btnTum.setBackgroundColor(R.style.);
 
              break;
      }
