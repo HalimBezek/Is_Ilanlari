@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.halim.testmenu2.testmenu2e">
+   
+
+   
+    <item
+        android:id="@+id/action_profil"
+        android:orderInCategory="100"
+        android:title="@string/action_profile"
+        android:icon="@mipmap/profil"
+        app:showAsAction="ifRoom|withText"
+         />
+    <item
+        android:id="@+id/action_login"
+        android:orderInCategory="100"
+        android:title="@string/action_login"
+        android:icon="@mipmap/login"
+        app:showAsAction="ifRoom|withText"
+        />
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        android:title="@string/action_logout"
+        android:icon="@mipmap/logout"
+        android:visible="false"
+        app:showAsAction="ifRoom|withText" />
+</menu>

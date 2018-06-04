@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">İş İlanları </string>
+    <string name="action_profile">Profil</string>
+    <string name="action_login">Giriş</string>
+    <string name="action_logout">Çıkış</string>
+    <string name="action_home">Ana Sayfa</string>
+</resources>
