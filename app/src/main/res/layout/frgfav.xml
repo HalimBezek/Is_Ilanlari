@@ -3,13 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="#FFB6CFF5">
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="favori fragment butonu" />
+        android:background="#FFB6CFF5"
+        android:gravity="center"
+        android:text="favori ilanlar bu fragmentte görünecek" />
 
 
 </android.support.constraint.ConstraintLayout>
