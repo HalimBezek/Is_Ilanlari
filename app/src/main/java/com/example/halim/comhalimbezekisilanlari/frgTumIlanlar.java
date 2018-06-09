@@ -54,7 +54,7 @@ public class frgTumIlanlar extends Fragment
         super.onActivityCreated(savedInstanceState);
 
         listView = (ListView) getView().findViewById(R.id.lvTumListe);
-       // new IlanServisiAsyncTask().execute("view-source:https://www.kariyer.net/is-ilanlari/");//parametre gonderilmese paremetre tanımlansa da olur
+        //new IlanServisiAsyncTask().execute("view-source:https://www.kariyer.net/is-ilanlari/");//parametre gonderilmese paremetre tanımlansa da olur
         new IlanServisiAsyncTask().execute("https://www.wired.com/feed/");//parametre gonderilmese paremetre tanımlansa da olur
 
     }
@@ -95,7 +95,7 @@ public class frgTumIlanlar extends Fragment
 
                        // NodeList nodeListBaslik = element.getElementsByTagName("div class=\"ilan\\");
                         NodeList nodeListBaslik = element.getElementsByTagName("title");
-                        //NodeList nodeListdate = element.getElementsByTagName("p class=\"tarih\\");
+                       // NodeList nodeListdate = element.getElementsByTagName("p class=\"tarih\\");
                         NodeList nodeListdate = element.getElementsByTagName("pubDate");
                         //NodeList nodeListPosition = element.getElementsByTagName("a class=\"link position\\");
                         NodeList nodeListPosition = element.getElementsByTagName("link");
@@ -120,7 +120,7 @@ public class frgTumIlanlar extends Fragment
                         modelList.add(model);
                         publishProgress("Liste güncelleniyor");
 
-
+/*
                       //resim alma yontemi
                         Pattern p = Pattern.compile(".*<img[^>]*src=\"([^\"]*)", Pattern.CASE_INSENSITIVE);
                         Matcher m = p.matcher(description);
@@ -139,7 +139,7 @@ public class frgTumIlanlar extends Fragment
 
                             }
 
-
+*/}
 
                 } else{
                     //internet bağlantısı yok
