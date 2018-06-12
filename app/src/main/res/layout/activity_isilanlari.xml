@@ -47,7 +47,7 @@
             android:id="@+id/button3"
             android:layout_width="50dp"
             android:layout_height="35dp"
-            android:background="@drawable/butontasarimi"
+            android:background="@drawable/butonsecimi"
             android:text="ARA" />
 
     </LinearLayout>
