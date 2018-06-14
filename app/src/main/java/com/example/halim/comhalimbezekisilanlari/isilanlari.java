@@ -28,6 +28,7 @@ public class isilanlari extends AppCompatActivity {
         btnFav = (Button) findViewById(R.id.btnFrgFav);
 
         btnTum = (Button) findViewById(R.id.btnFrgAll);
+
     }
 
     @SuppressLint("ResourceAsColor")

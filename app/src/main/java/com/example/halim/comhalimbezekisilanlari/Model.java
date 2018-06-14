@@ -2,7 +2,7 @@ package com.example.halim.comhalimbezekisilanlari;
 
 import android.graphics.Bitmap;
 
-public class Model  {
+public class Model  {//listeleme yaparken oluşturulan model
 
 
     private String title;

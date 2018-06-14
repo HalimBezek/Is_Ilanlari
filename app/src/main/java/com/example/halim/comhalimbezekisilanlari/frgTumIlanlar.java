@@ -95,7 +95,7 @@ public class frgTumIlanlar extends Fragment
 
                        // NodeList nodeListBaslik = element.getElementsByTagName("div class=\"ilan\\");
                         NodeList nodeListBaslik = element.getElementsByTagName("title");
-                       // NodeList nodeListdate = element.getElementsByTagName("p class=\"tarih\\");
+                        // NodeList nodeListdate = element.getElementsByTagName("p class=\"tarih\\");
                         NodeList nodeListdate = element.getElementsByTagName("pubDate");
                         //NodeList nodeListPosition = element.getElementsByTagName("a class=\"link position\\");
                         NodeList nodeListPosition = element.getElementsByTagName("link");

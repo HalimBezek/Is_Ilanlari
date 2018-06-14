@@ -47,7 +47,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:enabled="false"
             android:inputType="textPersonName"
+            android:textStyle="bold"
             android:text="AD" />
 
         <EditText
@@ -56,7 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:ems="5"
+            android:enabled="false"
             android:inputType="textPersonName"
+            android:textStyle="bold"
             android:text="SOYAD" />
 
         <EditText
@@ -65,7 +69,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:ems="5"
+            android:enabled="false"
             android:inputType="textPersonName"
+            android:textStyle="bold"
             android:text="E-MAİL" />
 
         <EditText
@@ -74,15 +80,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:ems="5"
+            android:enabled="false"
             android:inputType="textPersonName"
+            android:textStyle="bold"
             android:text="TELEFON NO" />
         <EditText
             android:id="@+id/etsifresi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:layout_marginTop="5dp"
             android:ems="5"
+            android:enabled="false"
+            android:textStyle="bold"
             android:text="ŞİFRE" />
 
         <TextView

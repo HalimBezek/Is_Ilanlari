@@ -107,4 +107,32 @@ public class Veritabani  extends SQLiteOpenHelper{
 
         return kisiBilgileriList;
     }
+
+    public List<KisiBilgileri> mailAndSifre() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] stunlar = new String[]{MAIL,SIFRE};
+
+        Cursor c = db.query(TABLE_NAME,stunlar,null,null,null,null,null);
+
+        int mailsirano = c.getColumnIndex(MAIL);
+        int sifresirano = c.getColumnIndex(SIFRE);
+
+
+        List<KisiBilgileri> kisiBilgileriList = new ArrayList<KisiBilgileri>();
+        for(c.moveToFirst();!c.isAfterLast();c.moveToNext())
+        {
+            KisiBilgileri kisiBilgileri = new KisiBilgileri();
+
+            kisiBilgileri.setMail(c.getString(mailsirano));
+            kisiBilgileri.setSifre(c.getString(sifresirano));
+
+            kisiBilgileriList.add(kisiBilgileri);
+        }
+
+
+        db.close();
+        return kisiBilgileriList;
+
+    }
 }

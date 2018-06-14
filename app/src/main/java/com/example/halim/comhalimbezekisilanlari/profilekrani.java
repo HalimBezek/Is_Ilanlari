@@ -15,7 +15,9 @@ import java.util.List;
 
 public class profilekrani extends AppCompatActivity {
 
-   private static TextView tviptal,tvduzenle,tvadSoyad;
+    public static boolean PERS_LOGIN;
+
+   private static TextView tv_iptal,tv_duzenle,tv_adSoyad;
    private static EditText et_ad,et_soyad, et_mail,et_telno,et_sifre;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -29,44 +31,45 @@ public class profilekrani extends AppCompatActivity {
         et_mail = findViewById(R.id.etemail);
         et_telno = findViewById(R.id.ettelno);
         et_sifre = findViewById(R.id.etsifresi);
-        tvduzenle = (TextView) findViewById(R.id.tvduzenle);
-        tviptal = (TextView) findViewById(R.id.tviptal);
-        tvadSoyad = findViewById(R.id.tvadsoyad);
+        tv_duzenle = (TextView) findViewById(R.id.tvduzenle);
+        tv_iptal = (TextView) findViewById(R.id.tviptal);
+        tv_adSoyad = findViewById(R.id.tvadsoyad);
 
         try {
+            Veritabani db = new Veritabani(getApplicationContext());
+            List<KisiBilgileri> kisiBilgileriList = new ArrayList<KisiBilgileri>();
+            kisiBilgileriList = db.SonKaydiGetir();
 
+            StringBuilder stringBuilder = new StringBuilder();//liste bilgilerini getirmek için
+            for (KisiBilgileri kisi:kisiBilgileriList)// içindeki verileri bitirene kadar dongu donecek
+            {
+                stringBuilder.append(kisi.getAd()+kisi.getSoyad()+kisi.getMail()+kisi.getTelNo()+kisi.getSifre());
 
-        Veritabani db = new Veritabani(getApplicationContext());
-        List<KisiBilgileri> kisiBilgileriList = new ArrayList<KisiBilgileri>();
-        kisiBilgileriList = db.SonKaydiGetir();
+                et_ad.setText(kisi.getAd());
+                et_soyad.setText(kisi.getSoyad());
+                et_mail.setText(kisi.getMail());
+                et_telno.setText(kisi.getTelNo());
+                et_sifre.setText(kisi.getSifre());
 
-        StringBuilder stringBuilder = new StringBuilder();//liste bilgilerini getirmek için
-        for (KisiBilgileri kisi:kisiBilgileriList)// içindeki verileri bitirene kadar dongu donecek
-        {
-            stringBuilder.append(kisi.getAd()+kisi.getSoyad()+kisi.getMail()+kisi.getTelNo()+kisi.getSifre());
-
-            et_ad.setText(kisi.getAd());
-            et_soyad.setText(kisi.getSoyad());
-            et_mail.setText(kisi.getMail());
-            et_telno.setText(kisi.getTelNo());
-            et_sifre.setText(kisi.getSifre());
-
-            tvadSoyad.setText(kisi.getAd() + " " + kisi.getSoyad());
-        }
+                tv_adSoyad.setText(kisi.getAd() + " " + kisi.getSoyad());
+            }
         }catch (Exception e){
 
             Toast.makeText(profilekrani.this, "Herhangi bir kayıt bulunamadı.", Toast.LENGTH_SHORT).show();
         }
-        tviptal.setOnClickListener(new View.OnClickListener() {
+
+
+        tv_duzenle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent ıntent = new Intent(getApplicationContext(),isilanlari.class);
+
+                Intent ıntent = new Intent(getApplicationContext(),kayitekrani.class);
 
                 startActivity(ıntent);
             }
         });
 
-        tviptal.setOnClickListener(new View.OnClickListener() {
+        tv_iptal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();

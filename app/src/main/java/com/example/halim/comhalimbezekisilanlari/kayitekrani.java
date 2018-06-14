@@ -9,11 +9,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class kayitekrani extends AppCompatActivity {
 
-    EditText et_Ad,et_Soyad,et_Email,et_Telno,et_Sifre,et_Sifretekrar;
-    TextView tv_Kvar, tv_Profil;
-    Button btn_Iptal,btn_Kayit;
+    private EditText et_Ad,et_Soyad,et_Email,et_Telno,et_Sifre,et_Sifretekrar;
+    private TextView tv_Kvar, tv_Profil;
+    private Button btn_Iptal,btn_Kayit;
+
+    Veritabani db;
+    List<KisiBilgileri> kisiBilgileriList ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,13 @@ public class kayitekrani extends AppCompatActivity {
         btn_Iptal = findViewById(R.id.btniptal);
         btn_Kayit = findViewById(R.id.btnkayit);
 
+        Veritabani db = new Veritabani(getApplicationContext());
+        List<KisiBilgileri> kisiBilgileriList = new ArrayList<KisiBilgileri>();
+        kisiBilgileriList = db.SonKaydiGetir();
+
+        if (!kisiBilgileriList.isEmpty())
+            KayitDuzenle(kisiBilgileriList);
+
         tv_Profil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +53,30 @@ public class kayitekrani extends AppCompatActivity {
                 startActivity(ıntent);
             }
         });
+
+    }
+
+    private void KayitDuzenle(List<KisiBilgileri> kisiBilgileriList) {
+
+        try {
+
+            StringBuilder stringBuilder = new StringBuilder();//liste bilgilerini getirmek için
+            for (KisiBilgileri kisi:kisiBilgileriList)// içindeki verileri bitirene kadar dongu donecek
+            {
+                stringBuilder.append(kisi.getAd()+kisi.getSoyad()+kisi.getMail()+kisi.getTelNo()+kisi.getSifre());
+
+                et_Ad.setText(kisi.getAd());
+                et_Soyad.setText(kisi.getSoyad());
+                et_Email.setText(kisi.getMail());
+                et_Telno.setText(kisi.getTelNo());
+                et_Sifre.setText(kisi.getSifre());
+
+
+            }
+        }catch (Exception e){
+
+            Toast.makeText(kayitekrani.this, "Herhangi bir kayıt bulunamadı.", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
