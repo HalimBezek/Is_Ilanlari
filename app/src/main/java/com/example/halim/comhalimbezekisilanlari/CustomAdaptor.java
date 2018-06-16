@@ -53,15 +53,15 @@ public class CustomAdaptor extends BaseAdapter {
 
         final Model model = modelList.get(i);
 
-        Date date = new Date(model.getDate());
-        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+        //Date date = new Date(model.getDate());
+        //DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 
-        resim.setImageBitmap(model.getResim());
+       // resim.setImageBitmap(model.getResim());
         title.setText(model.getTitle());
-        date_and_creator.
-                setText(String.format("%02d:%02d", date.getHours(), date.getMinutes()) + " | " +
+        date_and_creator.setText(model.getDate() + " / " + model.getCreator());
+                /*setText(String.format("%02d:%02d", date.getHours(), date.getMinutes()) + " | " +
                         df.format(date)+"   |  "+
-                        model.getCreator());
+                        model.getCreator());*/
 
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override

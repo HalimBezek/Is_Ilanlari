@@ -87,7 +87,6 @@
                     android:id="@+id/btngiris"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
                     android:background="@drawable/butonsecimi"
                     android:text="GİRİŞ"
                     tools:layout_editor_absoluteX="202dp"

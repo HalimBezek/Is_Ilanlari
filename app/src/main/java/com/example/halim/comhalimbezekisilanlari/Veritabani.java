@@ -135,4 +135,21 @@ public class Veritabani  extends SQLiteOpenHelper{
         return kisiBilgileriList;
 
     }
+
+    public void Guncelle(String ad, String soyad, String mail, String telno, String sifre){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(AD,ad);
+        cv.put(SOYAD,soyad);
+        cv.put(MAIL,mail);
+        cv.put(TELNO,telno);
+        cv.put(SIFRE,sifre);
+
+        db.update(TABLE_NAME,cv,null,null);
+        db.close();;
+
+    }
 }

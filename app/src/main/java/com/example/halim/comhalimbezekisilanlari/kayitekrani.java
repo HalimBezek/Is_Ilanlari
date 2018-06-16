@@ -99,11 +99,16 @@ public class kayitekrani extends AppCompatActivity {
                     Toast.makeText(kayitekrani.this, "Şifre tekrarı eşleşmedi !", Toast.LENGTH_SHORT).show();
                 else {
                     KisiBilgileri kisiBilgileri = new KisiBilgileri(ad, soyad, email, telNo, sifre, sifreT);
+                    long id = 0;
                     try {
 
                         Veritabani db = new Veritabani(getApplicationContext());
-                        long id = db.KayitEkle(kisiBilgileri);//normalde değişkeenler cerilirdi biz burada nesne vererek yapacağız
+                       // if (!kisiBilgileriList.isEmpty()){ // liste güncelleme için veri düzenlenecek
 
+                         //   db.Guncelle(ad,soyad,email,telNo,sifre);
+                        //}else {
+                            id = db.KayitEkle(kisiBilgileri);//normalde değişkeenler cerilirdi biz burada nesne vererek yapacağız
+                        //}
                         if (id == -1)
                             Toast.makeText(kayitekrani.this, "Kayıt esnasında bi hata oluştu !", Toast.LENGTH_SHORT).show();
                         else {
