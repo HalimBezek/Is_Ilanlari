@@ -7,19 +7,21 @@ public class KisiBilgileri {
     private String TelNo;
     private String Sifre;
     private String SifreTekrar;
+    private String IsLogin;
 
     public KisiBilgileri() { //boş bir yapıcı metot(Constractor)
 
     }
 
     //bilgileri buraya almanın burada birkaç yolu var : İstenirse constractor ile verilir ve ya get-set metotlarıyla da verilebilir.
-    public KisiBilgileri(String ad, String soyad, String mail, String telNo, String sifre, String sifreTekrar) {
+    public KisiBilgileri(String ad, String soyad, String mail, String telNo, String sifre, String sifreTekrar,String isLogin) {
         Ad = ad;
         Soyad = soyad;
         Mail = mail;
         TelNo = telNo;
         Sifre = sifre;
         SifreTekrar = sifreTekrar;
+        IsLogin = isLogin;
     }
 
     public String getAd() {
@@ -68,5 +70,12 @@ public class KisiBilgileri {
 
     public void setSifreTekrar(String sifreTekrar) {
         SifreTekrar = sifreTekrar;
+    }
+    public String getIsLogin() {
+        return IsLogin;
+    }
+
+    public void setIsLogin(String isLogin) {
+        this.IsLogin = isLogin;
     }
 }

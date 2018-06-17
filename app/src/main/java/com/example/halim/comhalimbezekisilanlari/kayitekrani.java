@@ -1,6 +1,7 @@
 package com.example.halim.comhalimbezekisilanlari;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +16,6 @@ import java.util.List;
 public class kayitekrani extends AppCompatActivity {
 
     private EditText et_Ad,et_Soyad,et_Email,et_Telno,et_Sifre,et_Sifretekrar;
-    private TextView tv_Kvar, tv_Profil;
     private Button btn_Iptal,btn_Kayit;
 
     Veritabani db;
@@ -33,9 +33,6 @@ public class kayitekrani extends AppCompatActivity {
         et_Sifre = findViewById(R.id.etsifre);
         et_Sifretekrar = findViewById(R.id.etsifret);
 
-        tv_Kvar = findViewById(R.id.tvkvar);
-        tv_Profil = findViewById(R.id.tvprofil);
-
         btn_Iptal = findViewById(R.id.btniptal);
         btn_Kayit = findViewById(R.id.btnkayit);
 
@@ -45,14 +42,6 @@ public class kayitekrani extends AppCompatActivity {
 
         if (!kisiBilgileriList.isEmpty())
             KayitDuzenle(kisiBilgileriList);
-
-        tv_Profil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent ıntent = new Intent(getApplicationContext(),profilekrani.class);
-                startActivity(ıntent);
-            }
-        });
 
     }
 
@@ -91,6 +80,7 @@ public class kayitekrani extends AppCompatActivity {
                 String telNo = et_Telno.getText().toString();
                 String sifre = et_Sifre.getText().toString();
                 String sifreT = et_Sifretekrar.getText().toString();
+                String isLogin = "true";
 
                 if (ad.equals("")||soyad.equals("")||email.equals("")||telNo.equals("")||sifre.equals("")||sifreT.equals(""))
                     Toast.makeText(kayitekrani.this, "Boş alan bırakmayınız !", Toast.LENGTH_SHORT).show();
@@ -98,12 +88,12 @@ public class kayitekrani extends AppCompatActivity {
                 if(!sifre.equals(sifreT))
                     Toast.makeText(kayitekrani.this, "Şifre tekrarı eşleşmedi !", Toast.LENGTH_SHORT).show();
                 else {
-                    KisiBilgileri kisiBilgileri = new KisiBilgileri(ad, soyad, email, telNo, sifre, sifreT);
+                    KisiBilgileri kisiBilgileri = new KisiBilgileri(ad, soyad, email, telNo, sifre, sifreT,isLogin);
                     long id = 0;
                     try {
 
                         Veritabani db = new Veritabani(getApplicationContext());
-                       // if (!kisiBilgileriList.isEmpty()){ // liste güncelleme için veri düzenlenecek
+                        // if (!kisiBilgileriList.isEmpty()){ // liste güncelleme için veri düzenlenecek
 
                          //   db.Guncelle(ad,soyad,email,telNo,sifre);
                         //}else {

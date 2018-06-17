@@ -23,6 +23,7 @@ public class Veritabani  extends SQLiteOpenHelper{
     private static final String MAIL = "mail";
     private static final String TELNO = "telno";
     private static final String SIFRE = "sifre";
+    private static final String ISLOGIN ="islogin";
 
 
 
@@ -43,7 +44,8 @@ public class Veritabani  extends SQLiteOpenHelper{
                 SOYAD + " TEXT ," +
                 MAIL + " TEXT ," +
                 TELNO + " TEXT ," +
-                SIFRE + " TEXT )";
+                SIFRE + " TEXT ," +
+                ISLOGIN + " TEXT )";
 
         sqLiteDatabase.execSQL(tablo_olustur);
     }
@@ -58,6 +60,8 @@ public class Veritabani  extends SQLiteOpenHelper{
 
     public long KayitEkle(KisiBilgileri kisiBilgileri) {
 
+        //onUpgrade(getWritableDatabase(),1,2); // database yeni bir eleman eklendiğinde bu kod bloğu çalıştırılabilir.
+
         SQLiteDatabase db = this.getWritableDatabase();//hem okunabilir hem yazılabilir durumda açtık
         ContentValues cv = new ContentValues();//kayıt ekleme ve kayıt güncellemede bu sınıftan yararlanılır.
 
@@ -66,6 +70,8 @@ public class Veritabani  extends SQLiteOpenHelper{
         cv.put(MAIL,kisiBilgileri.getMail());
         cv.put(TELNO,kisiBilgileri.getTelNo());
         cv.put(SIFRE,kisiBilgileri.getSifre());
+        cv.put(ISLOGIN,kisiBilgileri.getIsLogin());
+        cv.put(ISLOGIN,kisiBilgileri.getIsLogin());
 
         long id =db.insert(TABLE_NAME,null,cv);//kaydı db ze ekledik. insert eğer başarısıs olursa geriye -1 değeri gönderir
         db.close();
@@ -75,7 +81,7 @@ public class Veritabani  extends SQLiteOpenHelper{
 
     public List<KisiBilgileri> SonKaydiGetir() {
         SQLiteDatabase db = this.getReadableDatabase();//sadece okuyacagız
-        String[] stunlar = new String[]{AD,SOYAD,MAIL,TELNO,SIFRE};
+        String[] stunlar = new String[]{AD,SOYAD,MAIL,TELNO,SIFRE,ISLOGIN};
 
         Cursor c = db.query(TABLE_NAME,stunlar,null,null,null,null,null);//alınacak stunları biz belirledik
         //Cursor cursor = db.rawQuery("SELECT * FROM "+TABLE_NAME,null);//bu metotda kullanılabilir.
@@ -85,6 +91,7 @@ public class Veritabani  extends SQLiteOpenHelper{
         int mailsirano = c.getColumnIndex(MAIL);
         int telnosirano = c.getColumnIndex(TELNO);
         int sifresirano = c.getColumnIndex(SIFRE);
+        int isloginsirano = c.getColumnIndex(ISLOGIN);
 
 
         List<KisiBilgileri> kisiBilgileriList = new ArrayList<KisiBilgileri>();
@@ -97,6 +104,7 @@ public class Veritabani  extends SQLiteOpenHelper{
             kisiBilgileri.setMail(c.getString(mailsirano));
             kisiBilgileri.setTelNo(c.getString(telnosirano));
             kisiBilgileri.setSifre(c.getString(sifresirano));
+            kisiBilgileri.setIsLogin(c.getString(isloginsirano));
 
             kisiBilgileriList.add(kisiBilgileri);
 
@@ -133,6 +141,26 @@ public class Veritabani  extends SQLiteOpenHelper{
 
         db.close();
         return kisiBilgileriList;
+
+    }
+
+    public void LoginORNOT(){ //henüz kullanılmadı
+        SQLiteDatabase sqLiteDatabase =this.getReadableDatabase();
+        String[] stunlar = new String[]{ISLOGIN};
+
+        Cursor c = sqLiteDatabase.query(TABLE_NAME,stunlar,null,null,null,null,null);
+
+        int isloginsirano = c.getColumnIndex(ISLOGIN);
+
+        List<KisiBilgileri> kisiBilgileriList = new ArrayList<KisiBilgileri>();
+        for(c.moveToFirst();!c.isAfterLast();c.moveToNext())
+        {
+            KisiBilgileri kisiBilgileri = new KisiBilgileri();
+
+            kisiBilgileri.setIsLogin(c.getString(isloginsirano));
+
+            kisiBilgileriList.add(kisiBilgileri);
+        }
 
     }
 

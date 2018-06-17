@@ -97,9 +97,10 @@ public class girisekrani extends AppCompatActivity {
                 if(mail.equals(pmail) && sifre.equals(psifre))
                 {
                     Toast.makeText(girisekrani.this, "Giriş Başarılı,\n" +
-                            " artık favori ilanlar belirleyebilir ve ya \n kendinize mail atabilirsiniz !", Toast.LENGTH_SHORT).show();
+                            " artık favori ilanlar belirleyebilir ve ya \n farklı ilan sitelrini takip edebilirsiniz. !", Toast.LENGTH_SHORT).show();
 
                     Intent ıntent = new Intent(getApplicationContext(),isilanlari.class);
+
                     startActivity(ıntent);
 
                 }

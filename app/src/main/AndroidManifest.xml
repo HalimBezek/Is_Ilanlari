@@ -6,11 +6,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_mainicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_mainicon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
         <activity android:name="com.example.halim.comhalimbezekisilanlari.isilanlari">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,11 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.halim.comhalimbezekisilanlari.kayitekrani" />
-        <activity android:name="com.example.halim.comhalimbezekisilanlari.girisekrani" />
-        <activity android:name="com.example.halim.comhalimbezekisilanlari.sifremiunuttum" />
-        <activity android:name="com.example.halim.comhalimbezekisilanlari.profilekrani"></activity>
-        <activity android:name=".Icerik"/>
+        <activity android:name="com.example.halim.comhalimbezekisilanlari.kayitekrani"
+            android:label="Kaydet/Güncelle"/>
+        <activity android:name="com.example.halim.comhalimbezekisilanlari.girisekrani"
+            android:label="Giriş"/>
+        <activity android:name="com.example.halim.comhalimbezekisilanlari.sifremiunuttum"
+            android:label="Yeni Şifre"/>
+        <activity android:name="com.example.halim.comhalimbezekisilanlari.profilekrani"
+            android:label="Profilim"></activity>
+        <activity android:name=".Icerik" />
     </application>
 
 </manifest>

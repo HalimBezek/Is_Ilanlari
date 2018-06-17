@@ -1,21 +1,29 @@
 package com.example.halim.comhalimbezekisilanlari;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class isilanlari extends AppCompatActivity {
 
+    public String ISLOGIN = "false";
+    public MenuItem itemlogout, itemlogin;
     FragmentManager fragmentManager;
     Button btnFav, btnTum;
     @Override
@@ -28,6 +36,8 @@ public class isilanlari extends AppCompatActivity {
         btnFav = (Button) findViewById(R.id.btnFrgFav);
 
         btnTum = (Button) findViewById(R.id.btnFrgAll);
+
+
 
     }
 
@@ -72,7 +82,42 @@ public class isilanlari extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_settings, menu);
+
+        IsloginControl();
+
+        itemlogin = menu.getItem(1);
+        itemlogout = menu.getItem(2);
+
+        if(ISLOGIN.equals("true"))
+            itemlogin.setVisible(false);
+          // menu.getItem(1).setVisible(false);
+        else
+            itemlogout.setVisible(false);
+          // menu.getItem(2).setVisible(false);
+
+
+
         return true;
+    }
+
+    private void IsloginControl() {
+
+        try {
+            Veritabani db = new Veritabani(getApplicationContext());
+            List<KisiBilgileri> kisiBilgileriList = new ArrayList<KisiBilgileri>();
+           // db.LoginORNOT();
+            kisiBilgileriList=db.SonKaydiGetir();
+
+            StringBuilder stringBuilder = new StringBuilder();//liste bilgilerini getirmek için
+            for (KisiBilgileri kisi:kisiBilgileriList)// içindeki verileri bitirene kadar dongu donecek
+            {
+              ISLOGIN = kisi.getIsLogin();
+            }
+        }catch (Exception e){
+
+            Toast.makeText(isilanlari.this, "Kayıt bilgisi bulunamadı.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
@@ -80,9 +125,10 @@ public class isilanlari extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+          //noinspection SimplifiableIfStatement
         if (id == R.id.action_profil) {
 
             Intent ıntent =  new Intent(getApplicationContext(),profilekrani.class);
@@ -91,14 +137,40 @@ public class isilanlari extends AppCompatActivity {
 
             return true;
         }
-        if (id == R.id.action_login) {
+        if (id == R.id.action_ogin) {
             Intent intent = new Intent(getApplicationContext(),girisekrani.class);
 
             startActivity(intent);
 
             return true;
         }
-        if (id == R.id.action_logout) {
+        if (id == R.id.action_ogout) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Uyarı!");
+            builder.setMessage("Çıkış yapmak istediğinizden emin misiniz ? ");
+            builder.setIcon(android.R.drawable.ic_dialog_alert);
+
+            //builder.setCancelable(false);//herhangi bir yere tıklandığında diyalog kaybolmasın
+
+            builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                itemlogin.setVisible(true);
+                itemlogout.setVisible(false);
+
+                dialog.dismiss();
+                }
+            });
+            builder.setNegativeButton("Hayır", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
             return true;
         }
 

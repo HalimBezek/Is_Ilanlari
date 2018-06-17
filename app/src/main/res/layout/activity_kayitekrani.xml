@@ -122,27 +122,9 @@
                 android:layout_weight="1"
                 android:background="@drawable/butonsecimi"
                 android:onClick="butonaTiklandi"
-                android:text="KAYIT" />
+                android:text="KAYDET" />
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvkvar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="Zaten bir kaydım var.." />
-
-        <TextView
-            android:id="@+id/tvprofil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:paddingRight="30dp"
-            android:text="Profile Git"
-            android:textSize="18sp"
-            android:textStyle="bold" />
 
     </LinearLayout>
 </ScrollView>
