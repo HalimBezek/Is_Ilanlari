@@ -18,15 +18,20 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name="com.example.halim.comhalimbezekisilanlari.kayitekrani"
-            android:label="Kaydet/Güncelle"/>
+            android:label="Kaydet/Güncelle"
+            android:parentActivityName=".profilekrani"/>
         <activity android:name="com.example.halim.comhalimbezekisilanlari.girisekrani"
-            android:label="Giriş"/>
+            android:label="Giriş"
+            android:parentActivityName=".isilanlari"/>
         <activity android:name="com.example.halim.comhalimbezekisilanlari.sifremiunuttum"
-            android:label="Yeni Şifre"/>
+            android:label="Yeni Şifre"
+            android:parentActivityName=".girisekrani"/>
         <activity android:name="com.example.halim.comhalimbezekisilanlari.profilekrani"
-            android:label="Profilim"></activity>
+            android:label="Profilim"
+            android:parentActivityName=".isilanlari"></activity>
         <activity android:name=".Icerik" />
     </application>
 

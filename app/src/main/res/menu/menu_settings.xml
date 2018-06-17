@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.halim.testmenu2.testmenu2e">
-   
+
 
    
     <item
@@ -25,4 +25,7 @@
         android:title="@string/action_logout"
         android:icon="@mipmap/logout"
         app:showAsAction="ifRoom|withText" />
+
+
+
 </menu>

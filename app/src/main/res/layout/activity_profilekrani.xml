@@ -11,7 +11,7 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="495dp"
+        android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:orientation="vertical"
         android:gravity="center"
@@ -20,7 +20,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="155dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:background="@android:color/background_light"
@@ -99,19 +99,11 @@
             android:id="@+id/tvduzenle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:gravity="end"
             android:text="Düzenle"
             android:textStyle="italic" />
-
-        <TextView
-            android:id="@+id/tviptal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="right"
-            android:text="İptal"
-            android:textColor="@android:color/holo_red_light" />
 
     </LinearLayout>
 </ScrollView>

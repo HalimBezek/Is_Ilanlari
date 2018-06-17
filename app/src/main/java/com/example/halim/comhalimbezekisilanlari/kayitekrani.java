@@ -104,13 +104,8 @@ public class kayitekrani extends AppCompatActivity {
                         else {
                             Toast.makeText(kayitekrani.this, "Kayıt başarılı..", Toast.LENGTH_SHORT).show();
 
-                            et_Ad.setText("");
-                            et_Soyad.setText("");
-                            et_Email.setText("");
-                            et_Telno.setText("");
-                            et_Sifre.setText("");
-                            et_Sifretekrar.setText("");
-
+                            Intent ıntent = new Intent(getApplicationContext(),profilekrani.class);
+                            startActivity(ıntent);
 
                         }
 

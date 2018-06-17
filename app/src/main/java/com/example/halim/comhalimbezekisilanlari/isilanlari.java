@@ -39,6 +39,7 @@ public class isilanlari extends AppCompatActivity {
 
 
 
+
     }
 
     @SuppressLint("ResourceAsColor")
@@ -155,6 +156,9 @@ public class isilanlari extends AppCompatActivity {
             builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+
+
+
                 itemlogin.setVisible(true);
                 itemlogout.setVisible(false);
 

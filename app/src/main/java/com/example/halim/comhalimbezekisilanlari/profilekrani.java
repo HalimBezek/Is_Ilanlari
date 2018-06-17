@@ -17,7 +17,7 @@ public class profilekrani extends AppCompatActivity {
 
     public static boolean PERS_LOGIN;
 
-   private static TextView tv_iptal,tv_duzenle,tv_adSoyad;
+   private static TextView tv_duzenle,tv_adSoyad;
    private static EditText et_ad,et_soyad, et_mail,et_telno,et_sifre;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -32,7 +32,6 @@ public class profilekrani extends AppCompatActivity {
         et_telno = findViewById(R.id.ettelno);
         et_sifre = findViewById(R.id.etsifresi);
         tv_duzenle = (TextView) findViewById(R.id.tvduzenle);
-        tv_iptal = (TextView) findViewById(R.id.tviptal);
         tv_adSoyad = findViewById(R.id.tvadsoyad);
 
         try {
@@ -69,12 +68,6 @@ public class profilekrani extends AppCompatActivity {
             }
         });
 
-        tv_iptal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
     }
 
 

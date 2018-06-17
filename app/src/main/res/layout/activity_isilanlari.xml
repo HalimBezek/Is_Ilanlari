@@ -28,31 +28,32 @@
             android:id="@+id/mar"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
+            android:background="@drawable/edittexttasarimi"
             android:ems="10"
-            android:hint="Anahtar Kelime"
+            android:hint="  Ne"
             android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/editText2"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
+            android:background="@drawable/edittexttasarimi"
             android:ems="10"
-            android:hint="Nerede"
+            android:hint="  Nerede"
             android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="50dp"
-            android:layout_height="35dp"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/butonsecimi"
             android:text="ARA" />
 
     </LinearLayout>
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
