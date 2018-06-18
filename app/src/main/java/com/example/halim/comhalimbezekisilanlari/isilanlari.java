@@ -157,6 +157,11 @@ public class isilanlari extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
+                Veritabani db = new Veritabani(getApplicationContext());
+                long i = db.LoginORNOT("false");
+
+                if(i==-1)
+                    Toast.makeText(isilanlari.this, "Çıkış yapılırken bir hata oluştu", Toast.LENGTH_SHORT).show();
 
 
                 itemlogin.setVisible(true);

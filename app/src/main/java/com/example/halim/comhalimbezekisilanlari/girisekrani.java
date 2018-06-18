@@ -89,7 +89,7 @@ public class girisekrani extends AppCompatActivity {
 
                 }catch (Exception e){
 
-                    Toast.makeText(girisekrani.this, "Kayıt bulunamadı", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(girisekrani.this, "Kayıt bulunamadı " + e.getMessage().toString(), Toast.LENGTH_SHORT).show();
                 }
 
                 String mail = et_mail.getText().toString();
@@ -98,6 +98,12 @@ public class girisekrani extends AppCompatActivity {
                 {
                     Toast.makeText(girisekrani.this, "Giriş Başarılı,\n" +
                             " artık favori ilanlar belirleyebilir ve ya \n farklı ilan sitelrini takip edebilirsiniz. !", Toast.LENGTH_SHORT).show();
+
+                    Veritabani db = new Veritabani(getApplicationContext());
+                    long i = db.LoginORNOT("true");
+
+                    if(i==-1)
+                        Toast.makeText(girisekrani.this, "Giriş yapılırken bir hata oluştu", Toast.LENGTH_SHORT).show();
 
                     Intent ıntent = new Intent(getApplicationContext(),isilanlari.class);
 

@@ -33,7 +33,6 @@ public class Veritabani  extends SQLiteOpenHelper{
         super(context, DATABASE_NAME, null, DATABASE_VERSIYON);
     }
 
-
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {//BIRDAHA TABLO OLUSTURULDUĞUNDA COPY PASTE ILE PRATIK OLUR
 
@@ -144,24 +143,16 @@ public class Veritabani  extends SQLiteOpenHelper{
 
     }
 
-    public void LoginORNOT(){ //henüz kullanılmadı
-        SQLiteDatabase sqLiteDatabase =this.getReadableDatabase();
-        String[] stunlar = new String[]{ISLOGIN};
+    public long LoginORNOT(String durum){
+        SQLiteDatabase db =this.getWritableDatabase();
 
-        Cursor c = sqLiteDatabase.query(TABLE_NAME,stunlar,null,null,null,null,null);
+        ContentValues cv = new ContentValues();//kayıt ekleme ve kayıt güncellemede bu sınıftan yararlanılır.
 
-        int isloginsirano = c.getColumnIndex(ISLOGIN);
+        cv.put(ISLOGIN,durum);
 
-        List<KisiBilgileri> kisiBilgileriList = new ArrayList<KisiBilgileri>();
-        for(c.moveToFirst();!c.isAfterLast();c.moveToNext())
-        {
-            KisiBilgileri kisiBilgileri = new KisiBilgileri();
-
-            kisiBilgileri.setIsLogin(c.getString(isloginsirano));
-
-            kisiBilgileriList.add(kisiBilgileri);
-        }
-
+        long id =db.insert(TABLE_NAME,null,cv);//kaydı db ze ekledik. insert eğer başarısıs olursa geriye -1 değeri gönderir
+        db.close();
+        return id;
     }
 
     public void Guncelle(String ad, String soyad, String mail, String telno, String sifre){
