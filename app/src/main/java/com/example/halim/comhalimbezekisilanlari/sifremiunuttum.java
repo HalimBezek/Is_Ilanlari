@@ -1,13 +1,20 @@
 package com.example.halim.comhalimbezekisilanlari;
 
+import com.google.api.client.repackaged.org.apache.commons.codec.binary.Base64;
+import com.google.api.services.gmail.Gmail;
+import com.google.api.services.gmail.model.Draft;
+import com.google.api.services.gmail.model.Message;
+
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaCas;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +22,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Session;
@@ -33,17 +42,23 @@ public class sifremiunuttum extends AppCompatActivity {
     private ProgressDialog progressDialog =null;
     private Context context = null;
 
+    private EditText et_mailadres;
+    private TextView tviptal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // android.os.NetworkOnMainThreadException hatası için iki kod satırı eklendi.
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         setContentView(R.layout.activity_sifremiunuttum);
 
-        final EditText et_mailadres = findViewById(R.id.etemail);
-        final Button btn_sifregonder = findViewById(R.id.btnsifregonder);
-        final TextView tviptal = findViewById(R.id.tviptal);
+        et_mailadres = findViewById(R.id.etemail);
+        tviptal = findViewById(R.id.tviptal);
 
-        mail_alan = et_mailadres.getText().toString();
+
 
         tviptal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,86 +69,49 @@ public class sifremiunuttum extends AppCompatActivity {
 
     }
 
-    public void btntikla(View view) {
+    public void btnsifreGonder(View view) throws MessagingException, IOException {
 
         switch (view.getId()){
-
             case R.id.btnsifregonder:
-
-                mail_konu = "İş İlanları Şifre Değişikliği";
-                mail_icerik = "Değerli kullanıcı isteğiniz üzerine şifrenizi değiştirilerek gönderdik \n" +
-                        "Yeni şifreniz aşağıdadır: \n" +
-                        "123456789";
-
-
-                Properties props = new Properties();
-                props.put("mail.smtp.host","smtp.gmail.com");
-                props.put("mail.smtp.socketFactory.port", "465");
-                props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-                props.put("mail.smtp.auth", "true");
-                props.put("mail.smtp.port", "465");
-
-                session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication("halimbezek@gmail.com", "571dgm..,,_1992");
-                    }
-                });
-
-              //  progressDialog = ProgressDialog.show(getApplication(), "Mail", "Mail  Gönderiliyor…",true);//context
-                RetreiveFeedTask task= new RetreiveFeedTask();
-                task.execute();
+                sendEmail();
                 break;
         }}
 
-    private class RetreiveFeedTask extends AsyncTask<String, Void, String> {
 
+    private void sendEmail() {
+        mail_konu = "İş İlanları Şifre Değişikliği";
+        mail_icerik = "Değerli kullanıcı isteğiniz üzerine şifrenizi değiştirilerek gönderdik \n" +
+                "Yeni şifreniz aşağıdadır: \n" +
+                "123456789";
+        mail_alan = et_mailadres.getText().toString();
+        Mail m = new Mail("halimbezek@gmail.com", "571dgm..,,1992"); //gönderecek kişi kullanıcı adı ve şifresini girmeli
 
-        @Override
-        protected String doInBackground(String... strings) {
-            try {
+        String body = mail_icerik;
+        String subject = mail_konu;
+        String[] toArr = {mail_alan};//{ emailadress.getText().toString() };
+        m.setTo(toArr);
+        m.setSubject(subject);
+        m.setBody(body);
 
-                Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress("halimbezek@gmail.com"));//Kimden gönderiliyor?
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("halimbezek@gmail.com"));//(mail_alan Kime gönderiliyor?
-                message.setSubject( mail_konu);
-                message.setContent(mail_konu, "text/html; charset=utf-8");//message.setContent(talep.getText().toString(), “text/html; charset=utf-8″);
+        try {
 
-                Transport.send(message);// Mail gönderiliyor //Transport.send(mesaj); Mail gönderiliyor
-
+            if (m.send()) {
+                Toast.makeText(sifremiunuttum.this,
+                        "Email başarıla gönderildi.",
+                        Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(sifremiunuttum.this, "Email gönderilemedi tekrar deneyin.",
+                        Toast.LENGTH_LONG).show();
             }
-            catch (MessagingException e) {//Hata yakalama
-                e.printStackTrace();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-
-            }
-            return null;
-
+        } catch (Exception e) {
+            Log.e("MailApp", "Email gönderilemedi daha sonra tekrara deneyin", e);
+            Toast.makeText(sifremiunuttum.this, "Email gönderilemedi tekrar deneyin. " + e.getMessage().toString(),
+                    Toast.LENGTH_LONG).show();
         }
-
-        protected void onPostExecute(String feed) {//İşler yolunda gitmişse
-
-            progressDialog.dismiss();//Dialoğu kapat
-            Toast.makeText(getApplicationContext(), "Mail başarıyla gönderildi..", Toast.LENGTH_LONG).show();
-
+        finally {
+            finish();
         }
     }
-                /*
-                Intent mailıntent = new Intent(Intent.ACTION_SEND);
-                mailıntent.setType("message/rfc822");
-                mailıntent.putExtra(Intent.EXTRA_EMAIL, new String[]{mail_alan});
-                mailıntent.putExtra(Intent.ACTION_ANSWER, new String[]{mail_alan});
-                mailıntent.putExtra(Intent.EXTRA_SUBJECT, mail_konu);
-                mailıntent.putExtra(Intent.EXTRA_TEXT, mail_icerik);
 
-                try {
-
-                    startActivity(mailıntent);
-
-                }catch (ActivityNotFoundException e){
-                    Toast.makeText(this, "Hata oluştu " + e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                }
-*/
 
 }

@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/butonsecimi"
-            android:onClick="btntikla"
+            android:onClick="btnsifreGonder"
             android:text="YENİ ŞİFRE GÖNDER"
             tools:layout_editor_absoluteX="115dp"
             tools:layout_editor_absoluteY="79dp" />

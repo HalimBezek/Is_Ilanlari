@@ -256,7 +256,7 @@ public class frgTumIlanlar extends Fragment
                             String test = campany;
 
                             if(!ne_ara.equals("") && !nerede_ara.equals(""))
-                                if(ne_ara.equals(pozisyon) && nerede_ara.equals(city))
+                                if(ne_ara.toLowerCase().equals(pozisyon.toLowerCase()) && nerede_ara.toLowerCase().equals(city.toLowerCase()))
                                 {
                                     Model model = new Model();
                                     model.setTitle(pozisyon);
@@ -268,7 +268,7 @@ public class frgTumIlanlar extends Fragment
 
                                 }
                             if(!ne_ara.equals("") && nerede_ara.equals(""))
-                                if(ne_ara.equals(pozisyon))
+                                if(ne_ara.toLowerCase().equals(pozisyon.toLowerCase()))
                                 {
                                     Model model = new Model();
                                     model.setTitle(pozisyon);
@@ -280,7 +280,7 @@ public class frgTumIlanlar extends Fragment
 
                                 }
                              if (ne_ara.equals("") && !nerede_ara.equals(""))
-                                if(nerede_ara.equals(city))
+                                if(nerede_ara.toLowerCase().equals(city.toLowerCase()))
                                 {
                                     Model model = new Model();
                                     model.setTitle(pozisyon);
