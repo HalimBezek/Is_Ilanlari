@@ -25,6 +25,7 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.mail.Session;
 import javax.mail.*;
@@ -79,10 +80,13 @@ public class sifremiunuttum extends AppCompatActivity {
 
 
     private void sendEmail() {
-        mail_konu = "İş İlanları Şifre Değişikliği";
+
+        String yenisifre = sifreOlusur();
+        mail_konu = "İş İlanları Uygulaması Şifre Değişikliği";
         mail_icerik = "Değerli kullanıcı isteğiniz üzerine şifrenizi değiştirilerek gönderdik \n" +
-                "Yeni şifreniz aşağıdadır: \n" +
-                "123456789";
+                "Yeni şifreniz aşağıdadır: \n\n\n" +
+                yenisifre + "\n\n" +
+                "Görüş ve önerileriniz için : halimbezek@gmail.com";
         mail_alan = et_mailadres.getText().toString();
         Mail m = new Mail("halimbezek@gmail.com", "571dgm..,,1992"); //gönderecek kişi kullanıcı adı ve şifresini girmeli
 
@@ -111,6 +115,20 @@ public class sifremiunuttum extends AppCompatActivity {
         finally {
             finish();
         }
+    }
+
+    private String sifreOlusur() {
+
+        final String symbolstring = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._,";
+
+        final Random random = new Random();
+        final char[] symbols = symbolstring.toCharArray();
+        final char[] buf = new char[6];
+
+        for (int idx = 0; idx < 6; ++idx)
+            buf[idx] = symbols[random.nextInt(symbols.length)];
+
+        return new String(buf);
     }
 
 
