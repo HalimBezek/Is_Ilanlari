@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/mar"
+            android:id="@+id/etne"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginRight="5dp"
@@ -36,7 +36,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/etnerede"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginRight="5dp"
@@ -47,10 +47,11 @@
             android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnAra"
             android:layout_width="44dp"
             android:layout_height="wrap_content"
             android:background="@drawable/butonsecimi"
+            android:onClick="btnArama"
             android:text="ARA" />
 
     </LinearLayout>

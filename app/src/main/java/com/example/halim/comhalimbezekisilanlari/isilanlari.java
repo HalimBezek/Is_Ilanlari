@@ -15,8 +15,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,21 +34,21 @@ public class isilanlari extends AppCompatActivity {
 
     public String ISLOGIN = "false";
     public MenuItem itemlogout, itemlogin;
-    FragmentManager fragmentManager;
-    Button btnFav, btnTum;
+    private FragmentManager fragmentManager;
+    private Button btnFav, btnTum, btn_Ara;
+    private EditText et_Ne, et_Nerede;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_isilanlari);
 
         fragmentManager = getSupportFragmentManager();
-
         btnFav = (Button) findViewById(R.id.btnFrgFav);
-
         btnTum = (Button) findViewById(R.id.btnFrgAll);
 
-
-
+        btn_Ara = findViewById(R.id.btnAra);
+        et_Ne = findViewById(R.id.etne);
+        et_Nerede = findViewById(R.id.etnerede);
 
     }
 
@@ -69,6 +79,11 @@ public class isilanlari extends AppCompatActivity {
 
              transaction1.replace(R.id.lytcontainer,tumIlanlar,"frgTumIlanlar");
              transaction1.addToBackStack(null);
+             String a = et_Ne.getText().toString();
+             String b = et_Nerede.getText().toString();
+             tumIlanlar.setNe_ara(et_Ne.getText().toString());
+             tumIlanlar.setNerede_ara(et_Nerede.getText().toString());
+
              transaction1.commit();
 
              int color1 = Color.parseColor("#6dacea");
@@ -187,4 +202,7 @@ public class isilanlari extends AppCompatActivity {
     }
 
 
+    public void btnArama(View view) {
+        btnClick(btnTum);
+    }
 }
