@@ -32,7 +32,5 @@ public class Icerik  extends Activity{
 
         setContentView(webView);
 
-
-        //inputText.setText(myData);
     }
 }

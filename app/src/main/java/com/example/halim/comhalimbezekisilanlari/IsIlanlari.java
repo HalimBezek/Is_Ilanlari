@@ -14,10 +14,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,18 +28,23 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class isilanlari extends AppCompatActivity {
+import static com.example.halim.comhalimbezekisilanlari.frgTumIlanlar.filePath;
+
+public class IsIlanlari extends AppCompatActivity {
 
     public String ISLOGIN = "false";
     public MenuItem itemlogout, itemlogin;
     private FragmentManager fragmentManager;
     private Button btnFav, btnTum, btn_Ara;
-    private EditText et_Ne, et_Nerede;
+    //private EditText et_Ne, et_Nerede;
+    private AutoCompleteTextView actv_Ne, actv_Nerede;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +55,46 @@ public class isilanlari extends AppCompatActivity {
         btnTum = (Button) findViewById(R.id.btnFrgAll);
 
         btn_Ara = findViewById(R.id.btnAra);
-        et_Ne = findViewById(R.id.etne);
-        et_Nerede = findViewById(R.id.etnerede);
 
+        ArrayAdapter<String> adapterNe = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, JOBS);
+        actv_Ne = (AutoCompleteTextView)findViewById(R.id.actvNe);
+        actv_Ne.setAdapter(adapterNe);
+
+        ArrayAdapter<String> adapterNerede = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line,COUNTRIES);
+        actv_Nerede = (AutoCompleteTextView)findViewById(R.id.actvNerede);
+        actv_Nerede.setAdapter(adapterNerede);
     }
+    private static final String[] COUNTRIES = new String[] {
+            "Adana", "Adıyaman", "Afyon", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin",
+            "Aydın", "Balıkesir", "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale",
+            "Çankırı", "Çorum", "Denizli", "Diyarbakır", "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir",
+            "Gaziantep", "Giresun", "Gümüşhane", "Hakkari", "Hatay", "Isparta", "Mersin", "İstanbul", "İzmir",
+            "Kars", "Kastamonu", "Kayseri", "Kırklareli", "Kırşehir", "Kocaeli", "Konya", "Kütahya", "Malatya",
+            "Manisa", "Kahramanmaraş", "Mardin", "Muğla", "Muş", "Nevşehir", "Niğde", "Ordu", "Rize", "Sakarya",
+            "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdağ", "Tokat", "Trabzon", "Tunceli", "Şanlıurfa", "Uşak",
+            "Van", "Yozgat", "Zonguldak", "Aksaray", "Bayburt", "Karaman", "Kırıkkale", "Batman", "Şırnak",
+            "Bartın", "Ardahan", "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", "Düzce"
 
+};
+    private static final String[] JOBS = new String[] {
+            "java","android","Hemşirelik Hizmetleri Müdürü","Tele-Satış Uzmanı",
+            "Hemşire Yardımcılığı Öğretmenliği",
+            "IT Teknik Destek Uzmanı",
+            "Web Sosyal Medya Uzmanı","Project Team Leader",
+            "Muhasebe Elemanı","Marketing Communications Specialist","Muhasebe Uzmanı","Gönüllü İlişkileri Yetkilisi","VERİ GİRİŞ UZMANI",
+            "Procurement Engineer","Senior Software Engineer / Cloud Team","Kurumsal Satış Danışmanı",
+            "Software Development and Test Engineers (ANKARA)","Genel Başvuru -Engelli-","Direkt Satış Uzmanı-Manisa Şube",
+            "BT UYGULAMA YÖNETİCİSİ - GAZİANTEP","Otomotiv Elektrik-Elektronik Mühendisi (Ankara)","Muhasebe Uzmanı",
+            "Genel Başvuru","Güvenlik Görevlisi","Teknik Eleman","Satış Destek Uzmanı","Sosyal Medya Uzmanı",
+            "İNŞAAT TEKNİKERİ","Ticari Kayıplar Uzmanı","Misafir İlişkileri Görevlisi","Product Management and Development Marketing Spc.",
+            "Kaynak Robot Operatörü","Mekanik Teknisyeni (Dicle Otomotiv-Diyabakır)","CMM ÖLÇÜM OPERATÖRÜ","Aktif Satış Temsilcisi",
+            "Bilgi Teknolojileri İş Analisti","Kauçuk Pres Operatörü","Üretim Planlama Mühendisi",
+            "Final Kalite Kontrol Elemanı","İngilizce Öğretmeni","Temizlik Hizmetleri Proje Müdürü","CNC Operatörü",
+            "İş Analisti","AR-GE Uzmanı","Depo Elemanı","Aktif Satış Danışmanı","Proses Mühendisi","Saha Satış Uzmanı - Sakarya",
+            "Junior Accountant","Ön Büro Sorumlusu","BEYLİKDÜZÜ - SATIŞ&amp;KASA ELEMANI"
+    };
     @SuppressLint("ResourceAsColor")
     public void btnClick(View v)
     {
@@ -79,10 +122,11 @@ public class isilanlari extends AppCompatActivity {
 
              transaction1.replace(R.id.lytcontainer,tumIlanlar,"frgTumIlanlar");
              transaction1.addToBackStack(null);
-             String a = et_Ne.getText().toString();
-             String b = et_Nerede.getText().toString();
-             tumIlanlar.setNe_ara(et_Ne.getText().toString());
-             tumIlanlar.setNerede_ara(et_Nerede.getText().toString());
+
+             String a = actv_Ne.getText().toString();
+
+             tumIlanlar.setNe_ara(actv_Ne.getText().toString());
+             tumIlanlar.setNerede_ara(actv_Nerede.getText().toString());
 
              transaction1.commit();
 
@@ -131,7 +175,7 @@ public class isilanlari extends AppCompatActivity {
             }
         }catch (Exception e){
 
-            Toast.makeText(isilanlari.this, "Kayıt bilgisi bulunamadı.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(IsIlanlari.this, "Kayıt bilgisi bulunamadı.", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -147,14 +191,17 @@ public class isilanlari extends AppCompatActivity {
           //noinspection SimplifiableIfStatement
         if (id == R.id.action_profil) {
 
-            Intent ıntent =  new Intent(getApplicationContext(),profilekrani.class);
+            if(!itemlogin.isVisible()) {//yani login yapılmış ve logaut itemi aktifse
+                Intent ıntent = new Intent(getApplicationContext(), ProfilEkrani.class);
 
-            startActivity(ıntent);
+                startActivity(ıntent);
+            }else
+                Toast.makeText(this, "Profil ekranını görmek için giriş yapmanız gerekmektedir", Toast.LENGTH_LONG).show();
 
             return true;
         }
         if (id == R.id.action_ogin) {
-            Intent intent = new Intent(getApplicationContext(),girisekrani.class);
+            Intent intent = new Intent(getApplicationContext(),GirisEkrani.class);
 
             startActivity(intent);
 
@@ -176,7 +223,9 @@ public class isilanlari extends AppCompatActivity {
                 long i = db.LoginORNOT("false");
 
                 if(i==-1)
-                    Toast.makeText(isilanlari.this, "Çıkış yapılırken bir hata oluştu", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(IsIlanlari.this, "Çıkış yapılırken bir hata oluştu", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(IsIlanlari.this, "Çıkış işlemi başarıyla gerçekleşti", Toast.LENGTH_LONG).show();
 
 
                 itemlogin.setVisible(true);
@@ -203,6 +252,6 @@ public class isilanlari extends AppCompatActivity {
 
 
     public void btnArama(View view) {
-        btnClick(btnTum);
+        btnClick(btnTum);//arama butonuna basıldığında tüm ilanlarda arama yapacağı için o fonsiyon üzerinden gidildi.
     }
 }

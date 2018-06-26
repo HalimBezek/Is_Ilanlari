@@ -52,16 +52,15 @@
                     android:textColor="#000"
                     android:textSize="16sp" />
 
+                <TextView
+                    android:id="@+id/city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="14sp"
+                    android:textColor="#6dacea"/>
+
             </LinearLayout>
-
-
-            <ImageView
-                android:id="@+id/resim2"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="top|right|end"
-                android:background="@mipmap/logout" />
-
 
 
         </LinearLayout>

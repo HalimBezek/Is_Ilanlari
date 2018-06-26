@@ -10,9 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class CustomAdaptor extends BaseAdapter {
@@ -50,18 +47,14 @@ public class CustomAdaptor extends BaseAdapter {
         ImageView resim = (ImageView) rootView.findViewById(R.id.resim);
         TextView date_and_creator = (TextView) rootView.findViewById(R.id.date_and_creator);
         TextView title = (TextView) rootView.findViewById(R.id.title);
+        TextView city = (TextView) rootView.findViewById(R.id.city);
 
         final Model model = modelList.get(i);
 
-        //Date date = new Date(model.getDate());
-        //DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-
-       // resim.setImageBitmap(model.getResim());
+       // resim.setImageBitmap(model.getResim()); //ilan resmi alınacak
         title.setText(model.getTitle());
+        city.setText(model.getCity());
         date_and_creator.setText(model.getDate() + " / " + model.getCreator());
-                /*setText(String.format("%02d:%02d", date.getHours(), date.getMinutes()) + " | " +
-                        df.format(date)+"   |  "+
-                        model.getCreator());*/
 
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override

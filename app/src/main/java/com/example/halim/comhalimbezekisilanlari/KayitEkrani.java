@@ -1,19 +1,17 @@
 package com.example.halim.comhalimbezekisilanlari;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class kayitekrani extends AppCompatActivity {
+public class KayitEkrani extends AppCompatActivity {
 
     private EditText et_Ad,et_Soyad,et_Email,et_Telno,et_Sifre,et_Sifretekrar;
     private Button btn_Iptal,btn_Kayit;
@@ -64,7 +62,7 @@ public class kayitekrani extends AppCompatActivity {
             }
         }catch (Exception e){
 
-            Toast.makeText(kayitekrani.this, "Herhangi bir kayıt bulunamadı.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(KayitEkrani.this, "Herhangi bir kayıt bulunamadı.", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -83,34 +81,30 @@ public class kayitekrani extends AppCompatActivity {
                 String isLogin = "true";
 
                 if (ad.equals("")||soyad.equals("")||email.equals("")||telNo.equals("")||sifre.equals("")||sifreT.equals(""))
-                    Toast.makeText(kayitekrani.this, "Boş alan bırakmayınız !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KayitEkrani.this, "Boş alan bırakmayınız !", Toast.LENGTH_SHORT).show();
                 else
                 if(!sifre.equals(sifreT))
-                    Toast.makeText(kayitekrani.this, "Şifre tekrarı eşleşmedi !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KayitEkrani.this, "Şifre tekrarı eşleşmedi !", Toast.LENGTH_SHORT).show();
                 else {
                     KisiBilgileri kisiBilgileri = new KisiBilgileri(ad, soyad, email, telNo, sifre, sifreT,isLogin);
                     long id = 0;
                     try {
 
                         Veritabani db = new Veritabani(getApplicationContext());
-                        // if (!kisiBilgileriList.isEmpty()){ // liste güncelleme için veri düzenlenecek
+                        id = db.KayitEkle(kisiBilgileri);//normalde değişkeenler cerilirdi biz burada nesne vererek yapacağız
 
-                         //   db.Guncelle(ad,soyad,email,telNo,sifre);
-                        //}else {
-                            id = db.KayitEkle(kisiBilgileri);//normalde değişkeenler cerilirdi biz burada nesne vererek yapacağız
-                        //}
                         if (id == -1)
-                            Toast.makeText(kayitekrani.this, "Kayıt esnasında bi hata oluştu !", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(KayitEkrani.this, "Kayıt esnasında bi hata oluştu !", Toast.LENGTH_SHORT).show();
                         else {
-                            Toast.makeText(kayitekrani.this, "Kayıt başarılı..", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(KayitEkrani.this, "Kayıt başarılı..", Toast.LENGTH_SHORT).show();
 
-                            Intent ıntent = new Intent(getApplicationContext(),profilekrani.class);
+                            Intent ıntent = new Intent(getApplicationContext(),ProfilEkrani.class);
                             startActivity(ıntent);
 
                         }
 
                     } catch (Exception e) {
-                        Toast.makeText(kayitekrani.this, "Hay aksi ! \n" +
+                        Toast.makeText(KayitEkrani.this, "Hay aksi ! \n" +
                                 e.getMessage().toString(), Toast.LENGTH_SHORT).show();
                     }
                 }

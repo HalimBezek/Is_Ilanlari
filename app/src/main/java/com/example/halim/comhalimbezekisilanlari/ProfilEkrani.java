@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class profilekrani extends AppCompatActivity {
+public class ProfilEkrani extends AppCompatActivity {
 
     public static boolean PERS_LOGIN;
 
@@ -54,7 +54,7 @@ public class profilekrani extends AppCompatActivity {
             }
         }catch (Exception e){
 
-            Toast.makeText(profilekrani.this, "Herhangi bir kayıt bulunamadı.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfilEkrani.this, "Herhangi bir kayıt bulunamadı.", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -62,7 +62,7 @@ public class profilekrani extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent ıntent = new Intent(getApplicationContext(),kayitekrani.class);
+                Intent ıntent = new Intent(getApplicationContext(),KayitEkrani.class);
 
                 startActivity(ıntent);
             }

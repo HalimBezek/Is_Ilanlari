@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
-        <activity android:name="com.example.halim.comhalimbezekisilanlari.isilanlari">
+        <activity android:name="com.example.halim.comhalimbezekisilanlari.IsIlanlari">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,18 +26,18 @@
             </intent-filter>
 
         </activity>
-        <activity android:name="com.example.halim.comhalimbezekisilanlari.kayitekrani"
+        <activity android:name="com.example.halim.comhalimbezekisilanlari.KayitEkrani"
             android:label="Kaydet/Güncelle"
-            android:parentActivityName=".profilekrani"/>
-        <activity android:name="com.example.halim.comhalimbezekisilanlari.girisekrani"
+            android:parentActivityName=".ProfilEkrani"/>
+        <activity android:name="com.example.halim.comhalimbezekisilanlari.GirisEkrani"
             android:label="Giriş"
-            android:parentActivityName=".isilanlari"/>
-        <activity android:name="com.example.halim.comhalimbezekisilanlari.sifremiunuttum"
+            android:parentActivityName=".IsIlanlari"/>
+        <activity android:name="com.example.halim.comhalimbezekisilanlari.SifremiUnuttum"
             android:label="Yeni Şifre"
-            android:parentActivityName=".girisekrani"/>
-        <activity android:name="com.example.halim.comhalimbezekisilanlari.profilekrani"
+            android:parentActivityName=".GirisEkrani"/>
+        <activity android:name="com.example.halim.comhalimbezekisilanlari.ProfilEkrani"
             android:label="Profilim"
-            android:parentActivityName=".isilanlari"></activity>
+            android:parentActivityName=".IsIlanlari"></activity>
         <activity android:name=".Icerik" />
 
     </application>

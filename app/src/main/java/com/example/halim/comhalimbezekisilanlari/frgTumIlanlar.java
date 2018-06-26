@@ -3,9 +3,6 @@ package com.example.halim.comhalimbezekisilanlari;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,10 +22,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.jsoup.nodes.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
@@ -39,22 +32,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import static android.content.Context.MODE_PRIVATE;
 
 
 public class frgTumIlanlar extends Fragment
@@ -88,12 +70,8 @@ public class frgTumIlanlar extends Fragment
         super.onActivityCreated(savedInstanceState);
 
         listView = (ListView) getView().findViewById(R.id.lvTumListe);
-        //AsyncTaskServisleri asyncTaskServisleri = new AsyncTaskServisleri();
-        //new AsyncTaskServisleri().execute();
-        //serv
-       // new AsyncTaskServisleri().execute();
+
         new IlanServisiAsyncTask().execute("https://www.kariyer.net/is-ilanlari/");//parametre gonderilmese paremetre tanımlansa da olur
-        //new IlanServisiAsyncTask().execute("https://www.wired.com/feed/");//parametre gonderilmese paremetre tanımlansa da olur
 
     }
 
@@ -109,9 +87,6 @@ public class frgTumIlanlar extends Fragment
             //burada arayüz guncellenmez
             //publishProgress metodu ile onProgrsssUpdate metoduna bilgi gonderiliyor.
 
-            String a = ne_ara;
-            String b = nerede_ara;
-            //String filePath =  getContext().getFilesDir().getPath().toString() + "/bilgilerJson.txt";
             File file = new File(filePath);
 
             modelList = new ArrayList<Model>();
@@ -132,11 +107,8 @@ public class frgTumIlanlar extends Fragment
                     Elements datec = elements.select("p[class=tarih]");
 
                     //String strJson = getJsonFromUrl(URL);
-
                     //Elements status = elements.select("a[class=link position]");//incelendi mi, başvuruldu mu bilgisi :)
-
                     // Elements titlea = elements.select("a[data-title]");
-
                     // String veri4=titlea.html();//istenilen html taglarını çeker.
                     // String aciklama4=Jsoup.parse(veri4).text();//html taglarını texte çevirir.
 
@@ -168,7 +140,6 @@ public class frgTumIlanlar extends Fragment
                         jsonObjectChild.put("date", date);
                         jsonObjectChild.put("city", city);
 
-
                         jsonArray.put(i, jsonObjectChild);
 
                         Model model = new Model();
@@ -176,13 +147,10 @@ public class frgTumIlanlar extends Fragment
                         model.setPosition(position);
                         model.setCreator(campany);
                         model.setDate(date);
-                        model.setLink(city);
+                        model.setCity(city);
 
                         modelList.add(model);
                         publishProgress("Liste güncelleniyor");
-
-                        //  data = elementjsoup.outerHtml();
-                        //  data += "<br/>";// String dataText = data;
 
                     }
 
@@ -190,33 +158,14 @@ public class frgTumIlanlar extends Fragment
                 } finally {
                     try {
 
-
-                    /*
-                    File file = new File("bilgilerJson.txt");
-                    if(!file.exists()){
-                    //    file.createNewFile();
-                    }*/
-
                         if (!file.exists()) {
                             file.createNewFile();
                         }
 
                         BufferedWriter buf = new BufferedWriter(new FileWriter(file, true));
                         buf.write(jsonArray.toString());
-                        //buf.append(jsonObject.toString());
-                        // buf.newLine();
+
                         buf.close();
-
-                   /* Writer output = null;
-                    File file = new File("bilgilerJson.txt");
-                    output = new BufferedWriter(new FileWriter(file));
-                    output.write(jsonObject.toString());
-                    output.close();*/
-                        //fileWriter.write(jsonObject.toString());
-                        //fileWriter.close();
-                        //bufferedWriter.write(jsonObject.toString());
-                        //bufferedWriter.close();
-
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -263,7 +212,7 @@ public class frgTumIlanlar extends Fragment
                                     model.setPosition(pozisyon);
                                     model.setCreator(campany);
                                     model.setDate(date);
-                                    model.setLink(city);
+                                    model.setCity(city);
                                     modelList.add(model);
 
                                 }
@@ -275,7 +224,7 @@ public class frgTumIlanlar extends Fragment
                                     model.setPosition(pozisyon);
                                     model.setCreator(campany);
                                     model.setDate(date);
-                                    model.setLink(city);
+                                    model.setCity(city);
                                     modelList.add(model);
 
                                 }
@@ -287,7 +236,7 @@ public class frgTumIlanlar extends Fragment
                                     model.setPosition(pozisyon);
                                     model.setCreator(campany);
                                     model.setDate(date);
-                                    model.setLink(city);
+                                    model.setCity(city);
                                     modelList.add(model);
 
                                 }
@@ -303,7 +252,6 @@ public class frgTumIlanlar extends Fragment
                 }
                     if (bağlanti != null)
                         bağlanti.disconnect();
-
             }
 
             return modelList;//geriye dondurulecek değer gonderilen 3. parametredir
@@ -325,6 +273,9 @@ public class frgTumIlanlar extends Fragment
             CustomAdaptor customAdaptor = new CustomAdaptor(getActivity(),modelList);
             listView.setAdapter(customAdaptor);
             progressDialog.cancel();
+            if(modelList.size() <= 0)
+                Toast.makeText(getActivity(), "Aradığınız kriterlerde ilan bulunamadı.", Toast.LENGTH_LONG).show();
+
         }
 
         @Override

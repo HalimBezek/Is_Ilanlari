@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android=
-    "http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#6dacea"
-    tools:context=".isilanlari">
+    tools:context=".IsIlanlari">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -24,27 +23,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/etne"
+        <AutoCompleteTextView
+            android:id="@+id/actvNe"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginRight="5dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/edittexttasarimi"
-            android:ems="10"
-            android:hint="  Ne"
-            android:inputType="textPersonName" />
+            android:hint="ANAHTAR KELİME" />
 
-        <EditText
-            android:id="@+id/etnerede"
+        <AutoCompleteTextView
+            android:id="@+id/actvNerede"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginRight="5dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/edittexttasarimi"
-            android:ems="10"
-            android:hint="  Nerede"
-            android:inputType="textPersonName" />
+            android:hint="NEREDE" />
 
         <Button
             android:id="@+id/btnAra"
@@ -55,6 +46,7 @@
             android:text="ARA" />
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"

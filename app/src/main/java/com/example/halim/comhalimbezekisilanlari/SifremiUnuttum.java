@@ -1,38 +1,23 @@
 package com.example.halim.comhalimbezekisilanlari;
 
-import com.google.api.client.repackaged.org.apache.commons.codec.binary.Base64;
-import com.google.api.services.gmail.Gmail;
-import com.google.api.services.gmail.model.Draft;
-import com.google.api.services.gmail.model.Message;
-
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
-import android.media.MediaCas;
-import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Properties;
 import java.util.Random;
 
 import javax.mail.Session;
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
-public class sifremiunuttum extends AppCompatActivity {
+public class SifremiUnuttum extends AppCompatActivity {
 
     private String mail_gonderen;
     private String mail_alan;
@@ -59,8 +44,6 @@ public class sifremiunuttum extends AppCompatActivity {
         et_mailadres = findViewById(R.id.etemail);
         tviptal = findViewById(R.id.tviptal);
 
-
-
         tviptal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,12 +66,12 @@ public class sifremiunuttum extends AppCompatActivity {
 
         String yenisifre = sifreOlusur();
         mail_konu = "İş İlanları Uygulaması Şifre Değişikliği";
-        mail_icerik = "Değerli kullanıcı isteğiniz üzerine şifrenizi değiştirilerek gönderdik \n" +
+        mail_icerik = "Değerli kullanıcı şifreniz değiştirildi \n" +
                 "Yeni şifreniz aşağıdadır: \n\n\n" +
                 yenisifre + "\n\n" +
-                "Görüş ve önerileriniz için : halimbezek@gmail.com";
+                "Görüş, öneri ve şikayetleriniz için halimbezek@gmail.com adresine mail atabilirsiniz.";
         mail_alan = et_mailadres.getText().toString();
-        Mail m = new Mail("halimbezek@gmail.com", "571dgm..,,1992"); //gönderecek kişi kullanıcı adı ve şifresini girmeli
+        Mail m = new Mail("isilanlariuygulamasi@gmail.com", "123hlmbzk..,,"); //gönderecek kişi kullanıcı adı ve şifresini girmeli
 
         String body = mail_icerik;
         String subject = mail_konu;
@@ -100,16 +83,25 @@ public class sifremiunuttum extends AppCompatActivity {
         try {
 
             if (m.send()) {
-                Toast.makeText(sifremiunuttum.this,
-                        "Email başarıla gönderildi.",
-                        Toast.LENGTH_LONG).show();
+
+                try {
+
+                    Veritabani veritabani = new Veritabani(getApplicationContext());
+                    veritabani.SifreGuncelle(yenisifre);
+
+                    Toast.makeText(SifremiUnuttum.this,"Email başarıla gönderildi.",Toast.LENGTH_LONG).show();
+
+                }catch (Exception e)
+                {
+                    Toast.makeText(context, "Şifre değiştirirken hata oluştu", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(sifremiunuttum.this, "Email gönderilemedi tekrar deneyin.",
+                Toast.makeText(SifremiUnuttum.this, "Email gönderilemedi tekrar deneyin.",
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
             Log.e("MailApp", "Email gönderilemedi daha sonra tekrara deneyin", e);
-            Toast.makeText(sifremiunuttum.this, "Email gönderilemedi tekrar deneyin. " + e.getMessage().toString(),
+            Toast.makeText(SifremiUnuttum.this, "Email gönderilemedi tekrar deneyin. " + e.getMessage().toString(),
                     Toast.LENGTH_LONG).show();
         }
         finally {

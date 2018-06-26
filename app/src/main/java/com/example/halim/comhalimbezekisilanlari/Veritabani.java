@@ -58,10 +58,10 @@ public class Veritabani  extends SQLiteOpenHelper{
     }
 
     public long KayitEkle(KisiBilgileri kisiBilgileri) {
-
+        long id=0;
         //onUpgrade(getWritableDatabase(),1,2); // database yeni bir eleman eklendiğinde bu kod bloğu çalıştırılabilir.
 
-        SQLiteDatabase db = this.getWritableDatabase();//hem okunabilir hem yazılabilir durumda açtık
+        SQLiteDatabase db;// = this.getWritableDatabase();//hem okunabilir hem yazılabilir durumda açtık
         ContentValues cv = new ContentValues();//kayıt ekleme ve kayıt güncellemede bu sınıftan yararlanılır.
 
         cv.put(AD,kisiBilgileri.getAd());
@@ -70,10 +70,18 @@ public class Veritabani  extends SQLiteOpenHelper{
         cv.put(TELNO,kisiBilgileri.getTelNo());
         cv.put(SIFRE,kisiBilgileri.getSifre());
         cv.put(ISLOGIN,kisiBilgileri.getIsLogin());
-        cv.put(ISLOGIN,kisiBilgileri.getIsLogin());
+  //      cv.put(ISLOGIN,kisiBilgileri.getIsLogin());
 
-        long id =db.insert(TABLE_NAME,null,cv);//kaydı db ze ekledik. insert eğer başarısıs olursa geriye -1 değeri gönderir
-        db.close();
+        if(SonKaydiGetir()==null) {
+             db = this.getWritableDatabase();
+             id = db.insert(TABLE_NAME, null, cv);//kaydı db ze ekledik. insert eğer başarısıs olursa geriye -1 değeri gönderir
+
+        }else{
+             db = this.getWritableDatabase();
+             id = db.update(TABLE_NAME,cv, null, null);//kaydı db ze ekledik. insert eğer başarısıs olursa geriye -1 değeri gönderir
+        }
+        if(db.isOpen())
+            db.close();
         return id;
 
     }
@@ -94,7 +102,7 @@ public class Veritabani  extends SQLiteOpenHelper{
 
 
         List<KisiBilgileri> kisiBilgileriList = new ArrayList<KisiBilgileri>();
-        for (c.moveToFirst();!c.isAfterLast();c.moveToNext())
+        for (c.moveToLast();!c.isAfterLast();c.moveToNext())//son kayıt
         {
             KisiBilgileri kisiBilgileri = new KisiBilgileri();
 
@@ -117,8 +125,9 @@ public class Veritabani  extends SQLiteOpenHelper{
 
     public List<KisiBilgileri> mailAndSifre() {
 
+
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] stunlar = new String[]{MAIL,SIFRE};
+        String[] stunlar = new String[]{AD,SOYAD,MAIL,TELNO,SIFRE,ISLOGIN};
 
         Cursor c = db.query(TABLE_NAME,stunlar,null,null,null,null,null);
 
@@ -127,7 +136,8 @@ public class Veritabani  extends SQLiteOpenHelper{
 
 
         List<KisiBilgileri> kisiBilgileriList = new ArrayList<KisiBilgileri>();
-        for(c.moveToFirst();!c.isAfterLast();c.moveToNext())
+        //for(c.moveToFirst();!c.isAfterLast();c.moveToNext())
+        for(c.moveToLast();!c.isAfterLast();c.moveToNext())
         {
             KisiBilgileri kisiBilgileri = new KisiBilgileri();
 
@@ -150,7 +160,7 @@ public class Veritabani  extends SQLiteOpenHelper{
 
         cv.put(ISLOGIN,durum);
 
-        long id =db.insert(TABLE_NAME,null,cv);//kaydı db ze ekledik. insert eğer başarısıs olursa geriye -1 değeri gönderir
+        long id =db.update(TABLE_NAME,cv,null,null);//kaydı db ze ekledik. update eğer başarısıs olursa geriye -1 değeri gönderir
         db.close();
         return id;
     }
@@ -165,6 +175,18 @@ public class Veritabani  extends SQLiteOpenHelper{
         cv.put(SOYAD,soyad);
         cv.put(MAIL,mail);
         cv.put(TELNO,telno);
+        cv.put(SIFRE,sifre);
+
+        db.update(TABLE_NAME,cv,null,null);
+        db.close();;
+
+    }
+    public void SifreGuncelle(String sifre){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
         cv.put(SIFRE,sifre);
 
         db.update(TABLE_NAME,cv,null,null);

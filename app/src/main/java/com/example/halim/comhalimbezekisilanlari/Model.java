@@ -2,7 +2,7 @@ package com.example.halim.comhalimbezekisilanlari;
 
 import android.graphics.Bitmap;
 
-public class Model  {//listeleme yaparken oluşturulan model
+public class Model  {//ilanlarda listeleme yaparken oluşturulan model
 
 
     private String title;
@@ -11,7 +11,15 @@ public class Model  {//listeleme yaparken oluşturulan model
     private String link;
     private Bitmap resim;
     private String position;
+    private String city;
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public String getTitle() {
         return title;
