@@ -72,7 +72,7 @@ public class Veritabani  extends SQLiteOpenHelper{
         cv.put(ISLOGIN,kisiBilgileri.getIsLogin());
   //      cv.put(ISLOGIN,kisiBilgileri.getIsLogin());
 
-        if(SonKaydiGetir()==null) {
+        if(SonKaydiGetir().size() == 0) {
              db = this.getWritableDatabase();
              id = db.insert(TABLE_NAME, null, cv);//kaydı db ze ekledik. insert eğer başarısıs olursa geriye -1 değeri gönderir
 

@@ -39,7 +39,7 @@
                     android:id="@+id/date_and_creator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="test1111"
+                    android:text="date_and_creator"
                     android:textColor="#444"
                     android:textSize="12sp" />
 
@@ -50,13 +50,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:textColor="#000"
+                    android:text="title"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:text="city"
                     android:textSize="14sp"
                     android:textColor="#6dacea"/>
 

@@ -78,7 +78,7 @@ public class IsIlanlari extends AppCompatActivity {
             "Bartın", "Ardahan", "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", "Düzce"
 
 };
-    private static final String[] JOBS = new String[] {
+    private static final String[] JOBS = new String[] {// şimdilik manuel dolduruldu geliştirilince alınan iş ilan pozisyonları eklenecek
             "java","android","Hemşirelik Hizmetleri Müdürü","Tele-Satış Uzmanı",
             "Hemşire Yardımcılığı Öğretmenliği",
             "IT Teknik Destek Uzmanı",
@@ -155,8 +155,6 @@ public class IsIlanlari extends AppCompatActivity {
             itemlogout.setVisible(false);
           // menu.getItem(2).setVisible(false);
 
-
-
         return true;
     }
 
@@ -190,12 +188,11 @@ public class IsIlanlari extends AppCompatActivity {
 
           //noinspection SimplifiableIfStatement
         if (id == R.id.action_profil) {
-
             if(!itemlogin.isVisible()) {//yani login yapılmış ve logaut itemi aktifse
                 Intent ıntent = new Intent(getApplicationContext(), ProfilEkrani.class);
 
                 startActivity(ıntent);
-            }else
+           }else
                 Toast.makeText(this, "Profil ekranını görmek için giriş yapmanız gerekmektedir", Toast.LENGTH_LONG).show();
 
             return true;
