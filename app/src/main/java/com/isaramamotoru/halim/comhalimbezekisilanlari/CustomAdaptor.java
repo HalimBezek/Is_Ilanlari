@@ -51,10 +51,11 @@ public class CustomAdaptor extends BaseAdapter {
 
         final Model model = modelList.get(i);
 
-       // resim.setImageBitmap(model.getResim()); //ilan resmi alınacak
+        resim.setImageBitmap(model.getResim()); //ilan resmi alınacak
         title.setText(model.getTitle());
         city.setText(model.getCity());
         date_and_creator.setText(model.getDate() + " / " + model.getCreator());
+
 
         rootView.setOnClickListener(new View.OnClickListener() {
             @Override

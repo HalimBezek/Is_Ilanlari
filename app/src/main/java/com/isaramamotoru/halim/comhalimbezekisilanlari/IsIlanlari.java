@@ -17,31 +17,36 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.halim.comhalimbezekisilanlari.frgTumIlanlar.filePath;
-
 public class IsIlanlari extends AppCompatActivity {
 
-    public String ISLOGIN = "false";
+    public String ISLOGIN = "false", hangi_Pozisyon="",nerede_Pozisyon = "";
     public MenuItem itemlogout, itemlogin;
     private FragmentManager fragmentManager;
-    private Button btnFav, btnTum, btn_Ara;
+    public Button btnFav, btnTum, btn_Ara;
+    String btnTumColor;
+
+    public String getBtnTumColor() {
+        return btnTumColor;
+    }
+
+    public void setBtnTumColor(String btnTumColor) {
+        this.btnTumColor = btnTumColor;
+    }
+
+    public String getBtnFavColor() {
+        return btnFavColor;
+    }
+
+    public void setBtnFavColor(String btnFavColor) {
+        this.btnFavColor = btnFavColor;
+    }
+
+    String btnFavColor;
     //private EditText et_Ne, et_Nerede;
     private AutoCompleteTextView actv_Ne, actv_Nerede;
 
@@ -105,9 +110,10 @@ public class IsIlanlari extends AppCompatActivity {
              FragmentTransaction transaction = fragmentManager.beginTransaction();
              frgFavIlanlar  favIlanlar = new frgFavIlanlar();
 
-             //ekleyeceğimiz layout belirtiliyor
+             //ekleyeceğimiz layout belirtiliyor, gerituşuna basıldığında replace ile yer değiştirir.
              transaction.replace(R.id.lytcontainer,favIlanlar,"favIlanlar");
              transaction.addToBackStack(null);//yapıllan işlem kaydediliyor aslında
+
              transaction.commit();
              int color = Color.parseColor("#6dacea");
              int colorpres = Color.parseColor("#FFB6CFF5");
@@ -120,13 +126,13 @@ public class IsIlanlari extends AppCompatActivity {
              FragmentTransaction transaction1 = fragmentManager.beginTransaction();
              frgTumIlanlar tumIlanlar = new frgTumIlanlar();
 
-             transaction1.replace(R.id.lytcontainer,tumIlanlar,"frgTumIlanlar");
-             transaction1.addToBackStack(null);
+             transaction1.replace(R.id.lytcontainer,tumIlanlar,"frgTumIlanlar"); //replace
+             //transaction1.addToBackStack(null);
 
              String a = actv_Ne.getText().toString();
 
-             tumIlanlar.setNe_ara(actv_Ne.getText().toString());
-             tumIlanlar.setNerede_ara(actv_Nerede.getText().toString());
+             tumIlanlar.setNe_ara(hangi_Pozisyon);
+             tumIlanlar.setNerede_ara(nerede_Pozisyon);
 
              transaction1.commit();
 
@@ -135,6 +141,8 @@ public class IsIlanlari extends AppCompatActivity {
              btnTum.getBackground().mutate().setColorFilter(new PorterDuffColorFilter(colorpres1, PorterDuff.Mode.SRC));
              btnFav.getBackground().mutate().setColorFilter(new PorterDuffColorFilter(color1, PorterDuff.Mode.SRC));
 
+             hangi_Pozisyon = "";
+             nerede_Pozisyon = "";
              break;
      }
     }
@@ -249,6 +257,8 @@ public class IsIlanlari extends AppCompatActivity {
 
 
     public void btnArama(View view) {
+        hangi_Pozisyon = actv_Ne.getText().toString();
+        nerede_Pozisyon = actv_Nerede.getText().toString();
         btnClick(btnTum);//arama butonuna basıldığında tüm ilanlarda arama yapacağı için o fonsiyon üzerinden gidildi.
     }
 }
